@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración Escolar</title>
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+  <div class="dashboard">
+    <nav class="sidebar">
+      <div class="logo">Guevara Dashboard</div>
+      <ul>
+        <li><a href="#">Alumnos</a></li>
+        <li><a href="#">Alumnados</a></li>
+        <li><a href="#">Admins</a></li>
+        <li><a href="#">Registrar Alumno</a></li>
+      </ul>
+    </nav>
+    <main class="main-content">
+      <header>
+        <h1>Bienvenido, Administrador</h1>
+        <input type="search" placeholder="Buscar...">
+      </header>
+      <section class="cards">
+        <div class="card">
+          <h2>Alumnos</h2>
+          <p><%=cantidad%></p>
+        </div>
+        <div class="card">
+          <h2>Administradores</h2>
+          <p><%=cantidad_alumnados%></p>
+        </div>
+        <div class="card">
+          <h2>Alumnados</h2>
+          <p><%=cantidad_admins%></p>
+        </div>
+      </section>
+      <section class="tables">
+        <div class="table">
+          <h3>Últimos Alumnos Registrados</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Grado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Juan Pérez</td>
+                <td>15</td>
+                <td>3° Año</td>
+              </tr>
+              <tr>
+                <td>Ana Gómez</td>
+                <td>14</td>
+                <td>2° Año</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table">
+          <h3>Últimos Docentes Registrados</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Materia</th>
+                <th>Ingreso</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>María López</td>
+                <td>Matemáticas</td>
+                <td>2023</td>
+              </tr>
+              <tr>
+                <td>Carlos Díaz</td>
+                <td>Historia</td>
+                <td>2022</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
+

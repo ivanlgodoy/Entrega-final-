@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colegio Guevara</title>
+    <link rel="stylesheet" href="/css/stylesinicio.css">
+
+<body>
+    <%- include("./partials/header.ejs")%>
+    <div class="container">
+        <!-- Sección del logo -->
+        <div class="colegioguevara">
+            <img  alt="colegio"  src="/img/colegio.jpeg" width="400px"> 
+        </div>
+
+        <!-- Sección de inicio de sesión -->
+        <form action="/iniciar_session" method="POST">
+
+        <div class="login">
+            <h1>Colegio Guevara</h1>
+            <label for="correo">Correo</label>
+            <input type="text" id="name" name="correo" placeholder="Ingrese su correo">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" name="password" placeholder="Ingrese su contraseña">
+            <button type="submit">Iniciar Sesion</button>
+        </div>
+        </form>
+    </div>
+  <footer>Desarrollo C.I</footer>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Notas del Alumno</title>
+    <link rel="stylesheet" href="/css/interfaz_alumno.css" />
+</head>
+<body>
+    <%- include('./partials/header.ejs') %>
+
+    <table>
+        <tr>
+            <th colspan="15">Colegio Provincial DR. Ernesto Guevara</th>
+        </tr>
+        <tr>
+            <th colspan="5">Nombre: <%= usuario2.nombre %></th>
+            <th colspan="5">Curso: 7mo2da</th>
+            <th colspan="5">Año: 7mo</th>
+        </tr>
+
+        <tr>
+            <th colspan="2">Ciclo Superior</th>
+            <% usuario2.curso.materias.forEach(materia => { %>
+                <th class="vertical"><%= materia.nombre_materia %></th>
+            <% }) %>
+        </tr>
+
+        <!-- 1er Cuatrimestre -->
+        <tr>
+            <th rowspan="3">1° Cuatrimestre</th>
+            <th>1er Informe</th>
+            <% usuario2.curso.materias.forEach(materia => { %>
+                <td><%= materia.notas?.[0]?.nota ?? '-' %></td>
+            <% }) %>
+        </tr>
+        <tr>
+            <th>2do Informe</th>
+            <% usuario2.curso.materias.forEach(materia => { %>
+                <td><%= materia.notas?.[1]?.nota ?? '-' %></td>
+            <% }) %>
+        </tr>
+        <tr>
+            <th>Nota Final</th>
+            <% usuario2.curso.materias.forEach(materia => { %>
+                <td><%= materia.notas?.[2]?.nota ?? '-' %></td>
+            <% }) %>
+        </tr>
+
+        <!-- 2do Cuatrimestre -->
+        <tr>
+            <th rowspan="3">2° Cuatrimestre</th>
+            <th>1er Informe</th>
+            <% usuario2.curso.materias.forEach(materia => { %>
+                <td><%= materia.notas?.[3]?.nota ?? '-' %></td>
+            <% }) %>
+        </tr>
+        <tr>
+            <th>2do Informe</th>
+            <% usuario2.curso.materias.forEach(materia => { %>
+                <td><%= materia.notas?.[4]?.nota ?? '-' %></td>
+            <% }) %>
+        </tr>
+        <tr>
+            <th>Nota Final</th>
+            <% usuario2.curso.materias.forEach(materia => { %>
+                <td><%= materia.notas?.[5]?.nota ?? '-' %></td>
+            <% }) %>
+        </tr>
+    </table>
+</body>
+</html>
