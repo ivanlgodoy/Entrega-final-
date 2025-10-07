@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/admin.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="dashboard">
+    <nav class="sidebar">
+      <div class="logo">
+        <i class="fas fa-graduation-cap"></i>
+        <span>Guevara Dashboard</span>
+      </div>
+      <div class="user-info">
+        <div class="user-avatar">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        <div class="user-details">
+          <strong><%= user.nombre %></strong>
+          <span>Administrador</span>
+        </div>
+      </div>
+      <ul class="nav-links">
+        <li class="<%= currentPage === 'admin' ? 'active' : '' %>">
+          <a href="/admin">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="<%= currentPage === 'alumnos' ? 'active' : '' %>">
+          <a href="#">
+            <i class="fas fa-users"></i>
+            <span>Alumnos</span>
+            <span class="badge"><%= cantidad %></span>
+          </a>
+        </li>
+        <li class="<%= currentPage === 'docentes' ? 'active' : '' %>">
+          <a href="#">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <span>Docentes</span>
+            <span class="badge"><%= cantidad_alumnados %></span>
+          </a>
+        </li>
+        <li class="<%= currentPage === 'admins' ? 'active' : '' %>">
+          <a href="#">
+            <i class="fas fa-user-shield"></i>
+            <span>Administradores</span>
+            <span class="badge"><%= cantidad_admins %></span>
+          </a>
+        </li>
+        <li class="<%= currentPage === 'notas' ? 'active' : '' %>">
+          <a href="/notas">
+            <i class="fas fa-edit"></i>
+            <span>Gestión de Notas</span>
+          </a>
+        </li>
+        <li>
+          <a href="/registro">
+            <i class="fas fa-user-plus"></i>
+            <span>Registrar Alumno</span>
+          </a>
+        </li>
+      </ul>
+      <div class="sidebar-footer">
+        <a href="/logout" class="logout-btn">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Cerrar Sesión</span>
+        </a>
+      </div>
+    </nav>
+    
+    <main class="main-content">
+      <header class="header">
+        <div class="header-left">
+          <h1>Bienvenido, <%= user.nombre %></h1>
+          <p class="welcome-text">Panel de control administrativo</p>
+        </div>
+        <div class="header-right">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="search" placeholder="Buscar alumnos, docentes...">
+          </div>
+          <div class="header-actions">
+            <button class="notification-btn">
+              <i class="fas fa-bell"></i>
+              <span class="notification-dot"></span>
+            </button>
+            <div class="user-menu">
+              <img src="/api/placeholder/40/40" alt="Usuario" class="user-avatar-sm">
+            </div>
+          </div>
+        </div>
+      </header>
+      
+      <section class="stats-cards">
+        <div class="stat-card primary">
+          <div class="stat-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="stat-info">
+            <h3>Total Alumnos</h3>
+            <p class="stat-number"><%= cantidad %></p>
+            <span class="stat-change positive">
+              <i class="fas fa-arrow-up"></i>
+              12% este mes
+            </span>
+          </div>
+        </div>
+        
+        <div class="stat-card success">
+          <div class="stat-icon">
+            <i class="fas fa-chalkboard-teacher"></i>
+          </div>
+          <div class="stat-info">
+            <h3>Total Docentes</h3>
+            <p class="stat-number"><%= cantidad_alumnados %></p>
+            <span class="stat-change positive">
+              <i class="fas fa-arrow-up"></i>
+              5% este mes
+            </span>
+          </div>
+        </div>
+        
+        <div class="stat-card warning">
+          <div class="stat-icon">
+            <i class="fas fa-user-shield"></i>
+          </div>
+          <div class="stat-info">
+            <h3>Administradores</h3>
+            <p class="stat-number"><%= cantidad_admins %></p>
+            <span class="stat-change neutral">
+              <i class="fas fa-minus"></i>
+              Sin cambios
+            </span>
+          </div>
+        </div>
+        
+        <div class="stat-card info">
+          <div class="stat-icon">
+            <i class="fas fa-book"></i>
+          </div>
+          <div class="stat-info">
+            <h3>Cursos Activos</h3>
+            <p class="stat-number">15</p>
+            <span class="stat-change positive">
+              <i class="fas fa-arrow-up"></i>
+              2 nuevos
+            </span>
+          </div>
+        </div>
+      </section>
+      
+      <section class="content-grid">
+        <div class="content-card">
+          <div class="card-header">
+            <h3>Últimos Alumnos Registrados</h3>
+            <a href="#" class="view-all">Ver todos</a>
+          </div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Correo</th>
+                  <th>Fecha Registro</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if (alumnos && alumnos.length > 0) { %>
+                  <% alumnos.forEach(alumno => { %>
+                    <tr>
+                      <td>
+                        <div class="user-cell">
+                          <div class="user-avatar-sm">
+                            <i class="fas fa-user"></i>
+                          </div>
+                          <%= alumno.nombre %>
+                        </div>
+                      </td>
+                      <td><%= alumno.correo %></td>
+                      <td><%= new Date(alumno.createdAt).toLocaleDateString() %></td>
+                      <td>
+                        <span class="status-badge active">Activo</span>
+                      </td>
+                    </tr>
+                  <% }); %>
+                <% } else { %>
+                  <tr>
+                    <td colspan="4" class="no-data">No hay alumnos registrados</td>
+                  </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <div class="content-card">
+          <div class="card-header">
+            <h3>Últimos Docentes Registrados</h3>
+            <a href="#" class="view-all">Ver todos</a>
+          </div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Correo</th>
+                  <th>Fecha Registro</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if (alumnados && alumnados.length > 0) { %>
+                  <% alumnados.forEach(docente => { %>
+                    <tr>
+                      <td>
+                        <div class="user-cell">
+                          <div class="user-avatar-sm">
+                            <i class="fas fa-user-tie"></i>
+                          </div>
+                          <%= docente.nombre %>
+                        </div>
+                      </td>
+                      <td><%= docente.correo %></td>
+                      <td><%= new Date(docente.createdAt).toLocaleDateString() %></td>
+                      <td>
+                        <span class="status-badge active">Activo</span>
+                      </td>
+                    </tr>
+                  <% }); %>
+                <% } else { %>
+                  <tr>
+                    <td colspan="4" class="no-data">No hay docentes registrados</td>
+                  </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+      
+      <section class="quick-actions">
+        <h3>Acciones Rápidas</h3>
+        <div class="actions-grid">
+          <a href="/registro" class="action-card">
+            <i class="fas fa-user-plus"></i>
+            <span>Registrar Alumno</span>
+          </a>
+          <a href="/notas" class="action-card">
+            <i class="fas fa-edit"></i>
+            <span>Gestionar Notas</span>
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>
+  
+  <script>
+    // Funcionalidades básicas de JavaScript
+    document.addEventListener('DOMContentLoaded', function() {
+      // Toggle sidebar en móviles
+      const sidebarToggle = document.querySelector('.sidebar-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      
+      if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', function() {
+          sidebar.classList.toggle('collapsed');
+        });
+      }
+      
+      // Notificaciones
+      const notificationBtn = document.querySelector('.notification-btn');
+      if (notificationBtn) {
+        notificationBtn.addEventListener('click', function() {
+          alert('No hay notificaciones nuevas');
+        });
+      }
+    });
+  </script>
+</body>
+</html>
